@@ -28,7 +28,7 @@ void bubbleSort(int *arr, int n)
 
 void bubbleSortOptimized(int *arr, int n)
 {
-    bool swapped;  // 判断是否交换
+    bool swapped; // 判断是否交换
     for (int i = 0; i < n; i++)
     {
         swapped = 0;
@@ -45,11 +45,38 @@ void bubbleSortOptimized(int *arr, int n)
     }
 }
 
+// 递归版本,每次将最大的值放到最后，不断调用缩短排序范围
+int max(int *arr, int n)
+{
+    int maxElement = arr[0];
+    int index = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] > maxElement)
+        {
+            maxElement = arr[i];
+            index = i;
+        }
+    }
+    return index;
+}
+void bubbleSortRecursive(int *arr, int n)
+{
+    if (n == 1 || n == 0)
+        return;
+    else
+    {
+        swap(arr[n - 1], arr[max(arr, n)]);  // 也可以通过一轮冒泡完成
+        bubbleSortRecursive(arr, n - 1);
+    }
+}
+
 int main()
 {
     int a[5] = {3, 1, 2, 4, 6};
-    //bubbleSort(a, 5);
-    bubbleSortOptimized(a, 5);
+    // bubbleSort(a, 5);
+    // bubbleSortOptimized(a, 5);
+    bubbleSortRecursive(a, 5);
     for (int i = 0; i < 5; i++)
     {
         cout << a[i] << " ";
