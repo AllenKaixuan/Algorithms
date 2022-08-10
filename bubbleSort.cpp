@@ -3,6 +3,7 @@
 于大型数据上，因为其最坏和平均时间复杂度都很高，为O(n^2),即
 使数组已经是有序的，也会一直排序。因此可以当内循环没有交换时
 停止程序。
+交换次数最坏为n*(n-1)/2
 */
 #include <iostream>
 using namespace std;
@@ -45,29 +46,19 @@ void bubbleSortOptimized(int *arr, int n)
     }
 }
 
-// 递归版本,每次将最大的值放到最后，不断调用缩短排序范围
-int max(int *arr, int n)
-{
-    int maxElement = arr[0];
-    int index = 0;
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[i] > maxElement)
-        {
-            maxElement = arr[i];
-            index = i;
-        }
-    }
-    return index;
-}
+// 递归版本,通过一次冒泡每次将最大的值放到最后，不断递归调用缩短排序范围
 void bubbleSortRecursive(int *arr, int n)
 {
     if (n == 1 || n == 0)
         return;
     else
     {
-        swap(arr[n - 1], arr[max(arr, n)]);  // 也可以通过一轮冒泡完成
-        bubbleSortRecursive(arr, n - 1);
+        for (int i = n - 1; i > 0; i--)
+        {
+            if (arr[i] < arr[i - 1])
+                swap(arr[i], arr[i - 1]);
+        }
+        bubbleSortRecursive(arr , n-1);
     }
 }
 
