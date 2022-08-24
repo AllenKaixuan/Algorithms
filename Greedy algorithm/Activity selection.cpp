@@ -38,16 +38,15 @@ void printMaxActivities(Activity arr[], int n)
 
 void SelectActivities(vector<int> s, vector<int> f)
 {
-    // Vector to store results.
+   
     vector<pair<int, int>> ans;
 
-    // Minimum Priority Queue to sort activities in ascending order of finishing time (f[i]).
+   
 
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> p;
 
     for (int i = 0; i < s.size(); i++)
     {
-        // Pushing elements in priority queue where the key is f[i]
         p.push(make_pair(f[i], s[i]));  // 按照键值f[i]排序
     }
 
