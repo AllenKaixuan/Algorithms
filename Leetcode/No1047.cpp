@@ -7,8 +7,8 @@ using namespace std;
 string removeDuplicates(string s) {
     if (s.empty()) return "";
     stack<char> st;
-    st.push(s[0]);
-    for(int i = 1; i < s.size(); i++)
+   
+    for(int i = 0; i < s.size(); i++)
     {
         
         if(!st.empty() && s[i] == st.top())     // 必须先判断栈是否为空
